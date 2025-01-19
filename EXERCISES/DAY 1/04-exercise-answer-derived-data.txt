@@ -1,4 +1,4 @@
-answers for codebasics.io sql course exercise questions,
+answers for sql course exercise questions,
 
 1) Print profit % for all the movies 
    
