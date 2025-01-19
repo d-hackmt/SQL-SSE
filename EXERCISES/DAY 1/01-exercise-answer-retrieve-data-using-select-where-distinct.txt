@@ -1,4 +1,4 @@
-Answers for codebasics.io SQL course exercise questions,
+Answers for SQL course exercise questions,
 
 1) Print all movie titles and release year for all Marvel Studios movies
 	
