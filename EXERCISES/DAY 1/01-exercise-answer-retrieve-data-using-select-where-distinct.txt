@@ -1,0 +1,17 @@
+Answers for codebasics.io SQL course exercise questions,
+
+1) Print all movie titles and release year for all Marvel Studios movies
+	
+   SELECT title, release_year from movies where studio="Marvel Studios"
+
+2) Print all movies that have Avenger in their name
+
+   SELECT * from movies where title LIKE '%Avenger%'
+
+3) Print the year in which "The Godfather" move was released
+
+   SELECT release_year from movies where title="The Godfather"
+
+4) Print all distinct movie studios on Bollywood industry
+
+   SELECT DISTINCT studio from movies where industry="Bollywood"
