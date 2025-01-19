@@ -1,4 +1,4 @@
-answers for codebasics.io sql course exercise questions,
+answers for sql course exercise questions,
 
 1) how many movies were released between 2015 and 2022
 
