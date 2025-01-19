@@ -1,4 +1,4 @@
-Answers for codebasics.io sql course exercise questions,
+Answers for sql course exercise questions,
 
 1) print all movies by the order of their release year (latest first)
    
