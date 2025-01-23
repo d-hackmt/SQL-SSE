@@ -174,7 +174,7 @@ group by m.movie_id ;
 
 ## lets say i want like 
 #                           | actor name   |  title                 |
-#							| sanjay dutt  |  kgf , Munna bhai MBBS |
+#			    | sanjay dutt  |  kgf , Munna bhai MBBS |
 #
 # WE WILL PERFORM A CROSS JOIN again 
 
