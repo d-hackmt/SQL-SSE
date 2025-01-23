@@ -144,6 +144,10 @@ ORDER BY studio_cnt DESC ;
 # -------------------------------------------------------------------------------------------
 
 
+ #                          RELEASE YEAR | CNT of movies|
+ #                              2022     |        5     |
+ #                              2021     |        3     |
+ #
 ## select all the years where more than 2 movies were released
 SELECT release_year , count(*) as cnt FROM movies GROUP BY release_year ORDER BY cnt DESC ; 
 
@@ -164,6 +168,14 @@ SELECT title FROM movies HAVING release_year = 2022;
 
 # but if you this one
 SELECT title , studio FROM movies HAVING studio like "%marvel%";
+
+# -------------------------------------------------------------------------------------------
+#                                   FLOW OF QUERYING
+#                                                                                  
+#            SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY                                                                         
+#                                                                                       
+# -------------------------------------------------------------------------------------------
+
 
 # -------------------------------------------------------------------------------------------
 
