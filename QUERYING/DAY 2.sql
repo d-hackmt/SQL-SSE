@@ -35,7 +35,7 @@ RIGHT JOIN financials f
 using (movie_id);
 
 # lets see full join ,
-# make sure the column you are retriving should be the same
+# make sure the columns you are retriving should be the same
 
 SELECT 
 m.movie_id , title , budget , unit  , currency 
