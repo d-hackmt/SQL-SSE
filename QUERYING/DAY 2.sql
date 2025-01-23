@@ -1,3 +1,5 @@
+# Lets say i have someone who says i want to know the movie which made the highest profit 
+#
 #
 #                                           LETS EXPLORE JOINS
 #---------------------------------------------------------------------------------------------------
