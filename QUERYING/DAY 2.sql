@@ -138,7 +138,7 @@ select * from movie_actor;
 
 ## lets say i want like 
 #                           |  movie_id | title | actor name             |
-#							|  101      | kgf   |     yash , sanjay dutt |
+#			    |  101      | kgf   |     yash , sanjay dutt |
 #
 # WE WILL PERFORM A CROSS JOIN
 
