@@ -250,7 +250,7 @@ where studio like "%marvel%"
 
 SELECT actor_id , count(movie_id) as movie_cnt
 from movie_actor
-group by movie_id 
+group by actor_id 
 order by movie_cnt DESC;
 
 # but here name is missing ?
@@ -261,7 +261,7 @@ SELECT name , count(movie_id) as movie_cnt
 FROM actors a
 JOIN movie_actor ma
 USING (actor_id) 
-GROUP BY movie_id
+GROUP BY actor_id
 ORDER BY movie_cnt DESC;
 
 # see we got it 
