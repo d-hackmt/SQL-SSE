@@ -12,6 +12,7 @@
 -- Gross price total
 
 -- aggregated on monthly basis on product level for FY = 2021 
+-- customer name = croma
 
 
 -- ------------------------------------------------------------------
