@@ -22,6 +22,16 @@
 select * from dim_customer where customer 
 like "%croma%" and market = "India";
 
+
+# lets use the dateaddd function
+
+# 9-2020 -- > 1 2021
+# 10-2020 --> 2 2021
+	
+select date_add("2020-09-01" , interval 4 month);
+
+
+
 # lets retrive monthly aggregated for the fiscal year = 2021
 
 select * from fact_sales_monthly
