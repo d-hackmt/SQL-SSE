@@ -1,0 +1,169 @@
+## functions
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## get fiscal _year
+
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_fiscal_year`(calendar_date DATE) RETURNS int
+    DETERMINISTIC
+BEGIN
+		DECLARE fiscal_year INT;
+		SET fiscal_year = YEAR(DATE_ADD(calendar_date, INTERVAL 4 MONTH));
+		RETURN fiscal_year;
+END
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## get fiscal _year_quarter
+
+
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_fiscal_quarter`(
+	calender_date DATE 
+) RETURNS char(2) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+	DECLARE m TINYINT ;
+    DECLARE qtr CHAR(2);
+	SET m  = month(calender_date);
+    CASE 
+        WHEN m in (9 ,10,11) THEN 
+			set qtr = "Q1";
+        WHEN m in (12 ,1,2) THEN 
+			set qtr = "Q2";
+		WHEN m in (3 , 4 , 5) THEN 
+			set qtr ="Q3";
+        ELSE set qtr = "Q4";
+    END CASE;
+	RETURN qtr;
+END
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
+# stored procedures
+
+-------------------------------------------------------------------------------------------------------------------------
+
+#get_monthly_gross_sales
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_monthly_gross_sales`(
+	c_code INT
+)
+BEGIN
+
+select s.date , 
+ROUND(SUM(sold_quantity* gross_price),2) total_gross_price 
+from fact_sales_monthly s
+join fact_gross_price g 
+on g.product_code = s.product_code
+and g.fiscal_year = get_fiscal_year(s.date)
+where customer_code = c_code
+group by s.date
+order by date asc;
+
+
+END
+
+-------------------------------------------------------------------------------------------------------------------------
+
+#get_monthly_gross_sales_single
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_monthly_gross_sales_single`(
+	c_code INT
+)
+BEGIN
+
+select s.date , 
+ROUND(SUM(sold_quantity* gross_price),2) total_gross_price 
+from fact_sales_monthly s
+join fact_gross_price g 
+on g.product_code = s.product_code
+and g.fiscal_year = get_fiscal_year(s.date)
+where customer_code = c_code
+group by s.date
+order by date asc;
+
+
+END
+
+-------------------------------------------------------------------------------------------------------------------------
+
+#get_monthly_gross_multiple
+
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_monthly_gross_sales_multiple`(
+	in_customer_codes TEXT
+)
+BEGIN
+
+select s.date , 
+ROUND(SUM(sold_quantity* gross_price),2) total_gross_price 
+from fact_sales_monthly s
+join fact_gross_price g 
+on g.product_code = s.product_code
+and g.fiscal_year = get_fiscal_year(s.date)
+
+where find_in_set(s.customer_code , in_customer_codes) > 0
+
+group by s.date
+order by date asc;
+
+
+END
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## get market_badge
+
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_market_badge`(
+	IN in_market varchar(45),
+    IN in_fiscal_year YEAR,
+    OUT out_badge varchar(45)
+)
+BEGIN
+	
+    DECLARE qty INT default 0;
+    
+    ## set india as market by default
+    
+    if in_market = "" THEN
+		set in_market = "India";
+	END IF;
+    
+    ## retrive total quantity for market in a give f_year
+    
+	SELECT sum(sold_quantity) INTO qty
+	from fact_sales_monthly s
+	JOIN dim_customer c
+	ON  s.customer_code = c.customer_code 
+	where 
+		get_fiscal_year(s.date) = in_fiscal_year 
+		and c.market = in_market
+	group by c.market;
+    
+    ## determine if else market badge
+    
+    IF qty > 5000000 THEN
+		SET out_badge = "GOLD";
+	ELSE 
+		SET out_badge = "SILVER";
+    end if;
+END
