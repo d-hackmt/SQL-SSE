@@ -52,7 +52,7 @@ RIGHT JOIN financials f
 using (movie_id);
 
 #---------------------------------------------------------------------------------------------
-#                             SALES DATA SET FOR CROSS JOIN                             
+#                             FOOD DB DATA SET FOR CROSS JOIN                             
 #---------------------------------------------------------------------------------------------
 
 select * from items ;
